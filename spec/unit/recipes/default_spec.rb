@@ -11,7 +11,7 @@ describe 'chef-server-cluster::default' do
     expect(chef_run).to create_directory('/etc/opscode-analytics')
   end
 
-  it 'installs chef-server-core as a chef_server_ingredient' do
-    expect(chef_run).to install_chef_server_ingredient('chef-server-core')
+  it 'installs chef-server-core as a chef_ingredient' do
+    expect(chef_run).to install_chef_ingredient('chef-server-core')
   end
 end

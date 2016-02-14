@@ -53,26 +53,26 @@ node.default['chef-server-cluster'].merge!(chef_server_config)
 
 file '/etc/opscode/private-chef-secrets.json' do
   content JSON.pretty_generate(chef_secrets)
-  notifies :reconfigure, 'chef_server_ingredient[chef-server-core]'
+  notifies :reconfigure, 'chef_ingredient[chef-server-core]'
   sensitive true
 end
 
 file '/etc/opscode-reporting/opscode-reporting-secrets.json' do
   content JSON.pretty_generate(reporting_secrets)
-  notifies :reconfigure, 'chef_server_ingredient[opscode-reporting]'
+  notifies :reconfigure, 'chef_ingredient[opscode-reporting]'
   sensitive true
 end
 
 template '/etc/opscode/chef-server.rb' do
   source 'chef-server.rb.erb'
   variables chef_server_config: node['chef-server-cluster'], chef_servers: chef_servers
-  notifies :reconfigure, 'chef_server_ingredient[chef-server-core]'
+  notifies :reconfigure, 'chef_ingredient[chef-server-core]'
 end
 
-chef_server_ingredient 'opscode-manage' do
-  notifies :reconfigure, 'chef_server_ingredient[opscode-manage]'
+chef_ingredient 'opscode-manage' do
+  notifies :reconfigure, 'chef_ingredient[opscode-manage]'
 end
 
-chef_server_ingredient 'opscode-reporting' do
-  notifies :reconfigure, 'chef_server_ingredient[opscode-reporting]'
+chef_ingredient 'opscode-reporting' do
+  notifies :reconfigure, 'chef_ingredient[opscode-reporting]'
 end

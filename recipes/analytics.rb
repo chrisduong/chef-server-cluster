@@ -33,9 +33,9 @@ end
 
 file '/etc/opscode-analytics/opscode-analytics.rb' do
   content "topology 'standalone'\nanalytics_fqdn '#{analytics_fqdn}'"
-  notifies :reconfigure, 'chef_server_ingredient[opscode-analytics]'
+  notifies :reconfigure, 'chef_ingredient[opscode-analytics]'
 end
 
-chef_server_ingredient 'opscode-analytics' do
-  notifies :reconfigure, 'chef_server_ingredient[opscode-analytics]'
+chef_ingredient 'opscode-analytics' do
+  notifies :reconfigure, 'chef_ingredient[opscode-analytics]'
 end
